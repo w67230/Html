@@ -2,9 +2,134 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Moje dane</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        td, table{
+            border:solid 2px;
+            border-collapse: collapse;
+        }
+        table, tr, td{
+            padding:0;
+            margin:0;
+        }
+        table{
+            width:100px;
+            height:100px
+        }
+
+        header{
+            width:100%;
+            height:20%;
+            margin:0;
+            padding:0
+        }
+        nav{
+            width:100%;
+            margin:0;
+            padding:0
+        }
+        section{
+            width:100%;
+            margin:0;
+            padding:0
+        }
+        article{
+            width:50%;
+            margin:0;
+            padding:0;
+            float:left;
+        }
+        aside{
+            width:50%;
+            float:left;
+        }
+    </style>
 </head>
 <body>
-    <h1></h1>
-</body>
+    <header>
+        <h1>Nazywam się <b>Łukasz Fryc</b></h1>
+        <h2>Jestem studentem</h2>
+        <h3><i>Nic więcej nie będę tu pisać</i></h3>
+        <h4>A jednak dam tu linki do podstron</h4>
+        <h5><a href="podstrona1.html">Pierwsza podstrona</a></h5>
+        <h6><a href="podstrona2.html">Druga podstrona</a></h6>
+    </header>
+
+    <nav>
+        <h1>Lista posortowana</h1>
+        <ol>
+            <li><a href="https://wsiz.edu.pl/">Pierwszy obiekt</a></li>
+            <li><a href="https://sts.wsiz.rzeszow.pl/adfs/ls/?client-request-id=9051ebdd-567f-b1f9-9925-1162d1dc256c&username=&wa=wsignin1.0&wtrealm=urn%3afederation%3aMicrosoftOnline&wctx=estsredirect%3d2%26estsrequest%3drQQIARAAjZE9aBNhAIbv66VnUn8aXXSUYhfb-_nucn8BhyR3XhLPtmlN-rOE5H5yl1zyXZJLL95QF0HHrHZ0zFYnKQguInSKkyAWBBGKUhAHqZsNLo59hod3ft67OKRg-g7zD5acmmRsG5KGNV3_0bsxlzz-URo9qfw5eLF4vf7h86K3D272g4FpdQIq7LsR1YusfoRCyvfGYMEJAr-fpmk0CDyEWhSybdewOIGnDNSmUVijXwMwAeAEgPGMKHAS5ERZ4kSWlXnICpDiuDoj1C1ISlBMkSmJFUjJNBhSYuU6rKc4yLPmp5n51cwgcNipUM-NrF8zCRv12lUf9YN9fE8xdrPKdqahqNl1RqkYmVopKDle3imsFssbD2tqt7YVVgecniqXtiOTYXZLBTHlZm1NeexqatZ8kCuijjpssHpY8TzNj5xgvalpuRV1Qy86LVuw-e4gMDi36knyJhRVpqrvmGxli7HXwjF-obavcOK8SRt1jnAC-VbHNScx8CUGvseuMHg6Hp9LYrew29hZDLycPb9hZ1nSHx08u_9m-du77t48djRLw7LX5DVFbXqZTJNZkn19mB_SsldmjEI21PmllU1PFdUWn2vcY9NwRIARQRwSiTiexBbw3Bo8IcBPAjy_hB0mLvDc5DJ4exU7u_b09_Hpx6_vT_N_AQ2#">Drugi obiekt</a></li>
+            <li>Trzeci obiekt</li>
+            <li>Czwarty obiekt</li>
+        </ol>
+        <br/>
+
+        <h1>Lista niesortowana</h1>
+        <ul>
+            <li>Cos</li>
+            <li>Kolejne cos</li>
+            <li>Jeszcze jedno cos</li>
+            <li><a href="https://biblioteka.wsiz.rzeszow.pl/integro/site/startpage">Biblioteka</a></li>
+        </ul>
+    </nav>
+
+
+    <section>
+        <article>
+            <table>
+                <tr>
+                    <td>2022 - obecnie</td>
+                    <td>WSIiZ</td>
+                </tr>
+                <tr>
+                    <td>2018 - 2022</td>
+                    <td>ZST Kolbuszowa</td>
+                </tr>
+                <tr>
+                    <td>2015 - 2018</td>
+                    <td>Gimnazjum w Kolbuszowej</td>
+                </tr>
+                
+            </table>
+        </article>
+        <br>
+        <article>
+            <table>
+                <tr>
+                    <td></td>
+                    <td rowspan="2"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2" rowspan="2"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td></td>
+                </tr>
+            </table>
+        </article>
+    </section>
+
+    <aside>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Isolated_oak_at_Backley_Holmes%2C_New_Forest_-_geograph.org.uk_-_469673.jpg" alt="drzewo">
+    </aside>
+
+    <footer>
+        <p>a stopka pusta</p>
+    </footer>
+    </body>
 </html>
