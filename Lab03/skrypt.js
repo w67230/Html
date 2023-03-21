@@ -80,4 +80,47 @@ function max(){
 d.querySelector("#max").addEventListener("click", max);
 
 // 5 zadanie
+function nwd(){
+    var a = parseInt(prompt("Podaj pierwsza liczbe"));
+    var b = parseInt(prompt("Podaj druga liczbe"));
+
+    while(a != b){
+        if(a > b) a = a-b;
+        else b = b-a;
+    }
+
+    alert("NWD wynosi: " + a);
+    console.log("NWD wynosi: " + a);
+    
+}
+
+d.querySelector("#nwd").addEventListener("click", nwd);
+
+//6 zadanie
+var fStudent = {};
+fStudent.imie = "Ktos";
+fStudent.nazwisko = "Taki";
+fStudent.wiek = 21;
+
+var sStudent = {};
+fStudent.imie = "Łoś";
+fStudent.nazwisko = "Śmaki";
+fStudent.wiek = 13;
+
+var tStudent = {};
+fStudent.imie = "Ukasz";
+fStudent.nazwisko = "Fryc";
+fStudent.wiek = 549;
+
+console.log(fStudent.imie);
+console.log(fStudent.nazwisko);
+console.log(fStudent.wiek);
+
+console.log(sStudent.imie);
+console.log(sStudent.nazwisko);
+console.log(sStudent.wiek);
+
+console.log(tStudent.imie);
+console.log(tStudent.nazwisko);
+console.log(tStudent.wiek);
 
