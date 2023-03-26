@@ -102,25 +102,52 @@ fStudent.imie = "Ktos";
 fStudent.nazwisko = "Taki";
 fStudent.wiek = 21;
 
+console.log(fStudent.imie);
+console.log(fStudent.nazwisko);
+console.log(fStudent.wiek);
+
 var sStudent = {};
 fStudent.imie = "Łoś";
 fStudent.nazwisko = "Śmaki";
 fStudent.wiek = 13;
+
+console.log(sStudent.imie);
+console.log(sStudent.nazwisko);
+console.log(sStudent.wiek);
 
 var tStudent = {};
 fStudent.imie = "Ukasz";
 fStudent.nazwisko = "Fryc";
 fStudent.wiek = 549;
 
-console.log(fStudent.imie);
-console.log(fStudent.nazwisko);
-console.log(fStudent.wiek);
-
-console.log(sStudent.imie);
-console.log(sStudent.nazwisko);
-console.log(sStudent.wiek);
-
 console.log(tStudent.imie);
 console.log(tStudent.nazwisko);
 console.log(tStudent.wiek);
+
+//7 zadanie
+function obiekcik(){
+    var a = prompt("Podaj imie");
+    var b = prompt("Podaj nazwisko");
+    var c = parseInt(prompt("Podaj wiek"));
+
+    var studenciak = {};
+    studenciak.imie = a;
+    studenciak.nazwisko = b;
+    studenciak.wiek = c;
+
+    d.querySelector("#wynikObiekt").innerHTML = studenciak.imie + " " + studenciak.nazwisko + " " + studenciak.wiek;
+    
+}
+
+d.querySelector("#obiekt").addEventListener("click", obiekcik);
+
+//8 zadanie
+
+
+function showTime(){
+    data = new Date();
+    d.querySelector("#zegarek").innerHTML = data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds();
+}
+
+window.setInterval(showTime, 1000);
 
