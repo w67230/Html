@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div id="tabMnozenia">
+        
+    </div>
+    <div id="osoby">
+        
+    </div>
+    <script>
+        var d = document;
+
+        //zad 1
+        var tabla = d.createElement("table");
+        var firstRow = d.createElement("tr");
+        for(let i = 0; i <= 10; i++){
+            var firstRowTd = d.createElement("th");
+            if(i != 0) firstRowTd.innerHTML = i;
+            firstRow.appendChild(firstRowTd);
+        }
+        tabla.appendChild(firstRow);
+        for(let i = 1; i <= 10; i++){
+            var tr = d.createElement("tr");
+            for(let k = 0; k <= 10; k++){
+                if(k == 0){
+                    var firstColumn = d.createElement("th");
+                    firstColumn.innerHTML = i;
+                    tr.appendChild(firstColumn);
+                }
+                else{
+                    var td = d.createElement("td");
+                    td.innerHTML = i * k;
+
+                    tr.appendChild(td);
+                }
+
+            }
+            tabla.appendChild(tr);
+        }
+        //d.querySelector("#tabMnozenia").appendChild(tabla);
+
+        //zad 2
+        var imiona = ["Jan", "Ukasz", "Marek", "Jakub", "Paweł", "Kamil", "Mirosław", "Gniewomir", "Wiesław", "Andrzej"];
+        var nazwiska = ["Janowski", "Fryc", "Markowski", "Jakubowski", "Pawłowski", "Kamilowski", "Mirosławski", "Gniewomirski", "Wieśkowy", "Andrzejkowy"];
+
+        function losowaOsoba(){
+            var name, surname;
+            name = imiona[Math.floor(Math.random() * imiona.length)];
+            surname = nazwiska[Math.floor(Math.random() * nazwiska.length)];
+            var number = Math.floor(Math.random() * 3000001) + 5000000;
+            var age = Math.floor(Math.random() * 62) + 18;
+            return {imie:name, nazwisko:surname, wiek:age, numer:number};
+        }
+
+        //var x = parseInt(prompt("Podaj liczbe osob do wypisania"));
+        var x = 3;
+        if(x < 1) x = 1;
+        if(x > 20) x = 20;
+
+        var tabela = d.createElement("table");
+        for(let i = 0; i < x; i++){
+            var tr = d.createElement("tr");
+            var osoba = losowaOsoba();
+            for(let k = 0; k < osoba.length; k++){
+                var td = d.createElement("td");
+                td.innerHTML = osoba[k];
+                tr.appendChild(td);
+            }
+            tabela.appendChild(tr);
+        }
+        d.querySelector("#osoby").appendChild(tabela);
+        
+    </script>
+</body>
+</html>
