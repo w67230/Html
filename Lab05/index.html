@@ -45,11 +45,30 @@
             }
             tabla.appendChild(tr);
         }
-        //d.querySelector("#tabMnozenia").appendChild(tabla);
+        d.querySelector("#tabMnozenia").appendChild(tabla);
 
         //zad 2
         var imiona = ["Jan", "Ukasz", "Marek", "Jakub", "Paweł", "Kamil", "Mirosław", "Gniewomir", "Wiesław", "Andrzej"];
         var nazwiska = ["Janowski", "Fryc", "Markowski", "Jakubowski", "Pawłowski", "Kamilowski", "Mirosławski", "Gniewomirski", "Wieśkowy", "Andrzejkowy"];
+
+
+        var x = parseInt(prompt("Podaj liczbe osob do wypisania"));
+        if(x < 1) x = 1;
+        if(x > 20) x = 20;
+
+        var tabela = d.createElement("table");
+        for(let i = 0; i < x; i++){
+            var tr = d.createElement("tr");
+            var osoba = losowaOsoba();
+            for(let k = 0; k < 4; k++){
+                var td = d.createElement("td");
+                td.innerHTML = wypiszOsobe(osoba, k);
+                tr.appendChild(td);
+            }
+            tabela.appendChild(tr);
+        }
+        d.querySelector("#osoby").appendChild(tabela);
+
 
         function losowaOsoba(){
             var name, surname;
@@ -60,23 +79,12 @@
             return {imie:name, nazwisko:surname, wiek:age, numer:number};
         }
 
-        //var x = parseInt(prompt("Podaj liczbe osob do wypisania"));
-        var x = 3;
-        if(x < 1) x = 1;
-        if(x > 20) x = 20;
-
-        var tabela = d.createElement("table");
-        for(let i = 0; i < x; i++){
-            var tr = d.createElement("tr");
-            var osoba = losowaOsoba();
-            for(let k = 0; k < osoba.length; k++){
-                var td = d.createElement("td");
-                td.innerHTML = osoba[k];
-                tr.appendChild(td);
-            }
-            tabela.appendChild(tr);
+        function wypiszOsobe(osoba, k){
+            if(k == 0) return osoba.imie;
+            else if(k == 1) return osoba.nazwisko;
+            else if(k == 3) return osoba.wiek;
+            return osoba.numer;
         }
-        d.querySelector("#osoby").appendChild(tabela);
         
     </script>
 </body>
