@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            width:50%;
+            height:50vh;
+            border:solid;
+        }
+        th{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <form name="dane" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <th><label for="imie">Imię</label></th>
+                <td><input type="text" name="imie" id="imie"></td>
+            </tr>
+            <tr>
+                <th><label for="nazwisko">Nazwisko</label></th>
+                <td><input type="text" name="nazwisko" id="nazwisko"></td>
+            </tr>
+            <tr>
+                <th><label for="mail">E-mail</label></th>
+                <td><input type="email" name="mail" id="mail"></td>
+            </tr>
+            <tr>
+                <th><label for="haslo">Hasło</label></th>
+                <td><input type="password" name="haslo" id="haslo"></td>
+                <td><p id="trudnoscHasla"></p></td>
+            </tr>
+            <tr>
+                <th><label for="pM" id="labM">Mężczyzna</label></th>
+                <td><input type="radio" name="plec" value="m" id="pM"></td>
+                <th><label for="pK" id="labK">Kobieta</label></th>
+                <td><input type="radio" name="plec" value="k" id="pK"></td>
+            </tr>
+            <tr>
+                <th><label for="tel">Nr telefonu</label></th>
+                <td><input type="tel" name="telefon" id="tel"></td>
+            </tr>
+            <tr>
+                <th><label for="data">Data urodzenia</label></th>
+                <td><input type="date" name="data" id="data"></td>
+            </tr>
+            <tr>
+                <th><label for="kraj">Kraj</label></th>
+                <td><input type="text" name="kraj" id="kraj"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="zapisz" id="wyslij"></td>
+            </tr>
+        </table>
+        
+    </form>
+
+    <script>
+        var d = document;
+
+        function validateForm(){
+            let dane = d.forms["dane"];
+            for(let i = 0; i < dane.length - 1; i++){
+                dane[i].style = "";
+                if(sprawdzCzyPuste(dane[i].value)){
+                    dane[i].style = "background-color:red;";
+                    return false;
+                }
+                if(dane[i].type == "text"){
+                    if(sprawdzDlugoscZnakow(3, 14, dane[i].value)){
+                        dane[i].style = "background-color:red;";
+                        return false;
+                    }
+                }
+                else if(dane[i].type == "email"){
+                    if(sprawdzMaila(dane[i].value)){
+                        dane[i].style = "background-color:red;";
+                        return false;
+                    }
+                }
+
+
+            }
+            return true;
+        }
+        
+        function sprawdzCzyPuste(value){
+            if(value == "") return true;
+            return false;
+        }
+
+        function sprawdzDlugoscZnakow(min, max, value){
+            if(value.length < min || value.length > max) return true;
+            return false;
+        }
+
+        function sprawdzMaila(value){
+            let maMalpe = false;
+            let maKropke = false;
+            for(let i = 0; i < value.length; i++){
+                if(value[i] == "@") maMalpe = true;
+                else if(value[i] == "." && maMalpe) maKropke = true;
+            }
+
+            return !maMalpe || !maKropke;
+        }
+
+        function zwrocTrudnoscHasla(value){
+
+
+            d.querySelector("#trudnoscHasla").innerHTML = "";
+        }
+
+
+    </script>
+</body>
+</html>
