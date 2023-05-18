@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            width:65%;
+            height:50vh;
+            border:solid;
+        }
+        th{
+            text-align: left;
+        }
+        p{
+            margin:0;
+            padding:0;
+        }
+        #adresKores{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form name="dane" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <th><label for="imie">Imię</label></th>
+                <!--<td><input type="text" name="imie" id="imie" required></td> -->
+                                                <!-- ^^ domyslna walidacja formularza (required) ^^ -->
+                <td><input type="text" name="imie" id="imie"></td>
+                <td><p id="valimie"></p></td>
+            </tr>
+            <tr>
+                
+                <th><label for="nazwisko">Nazwisko</label></th>
+                <td><input type="text" name="nazwisko" id="nazwisko"></td>
+                <td><p id="valnazwisko"></p></td>
+            </tr>
+            <tr>
+                <th><label for="mail">E-mail</label></th>
+                <td><input type="email" name="mail" id="mail"></td>
+                <td><p id="valmail"></p></td>
+            </tr>
+            <tr>
+                <th><label for="haslo">Hasło</label></th>
+                <td><input type="password" name="haslo" id="haslo"></td>
+                <td><p id="valhaslo"></p></td>
+            </tr>
+            <tr>
+                <th><label for="powthaslo">Powtórz hasło</label></th>
+                <td><input type="password" name="powthaslo" id="powthaslo"></td>
+                <td><p id="valpowthaslo"></p></td>
+            </tr>
+            <tr>
+                <th><p id="message">Płeć:</p></th>
+            </tr>
+            <tr>
+                <td><label for="pM" id="labM">Mężczyzna</label><input type="radio" name="plec" value="m" id="pM"></td>
+                <td><label for="pK" id="labK">Kobieta</label><input type="radio" name="plec" value="k" id="pK"></td>
+                <td><p id="valplec"></p></td>
+            </tr>
+            <tr>
+                <th><label for="tel">Nr telefonu</label></th>
+                <td><input type="text" name="tel" id="tel"></td>
+                <td><p id="valtel"></p></td>
+            </tr>
+            <tr>
+                <th><label for="data">Data urodzenia</label></th>
+                <td><input type="date" name="data" id="data"></td>
+                <td><p id="valdata"></p></td>
+            </tr>
+            <tr>
+                <th><label for="kraj">Kraj</label></th>
+                <td><input type="text" name="kraj" id="kraj"></td>
+                <td><p id="valkraj"></p></td>
+            </tr>
+            <tr>
+                <th><label for="wojewodztwo">Województwo</label></th>
+                <td id="rodzicWojewodztwa"><input type="text" name="wojewodztwo" id="wojewodztwo" disabled = "disabled"></td>
+                <td><p id="valwojewodztwo"></p></td>
+            </tr>
+            <tr>
+                <th><label for="adres">Adres zamieszkania</label></th>
+                <td><input type="text" name="adres" id="adres" disabled = "disabled"></td>
+                <td><p id="valadres"></p></td>
+            </tr>
+            <tr>
+                <th><label for="kores">Adres korespondencyjny jest taki sam jak adres zamieszkania</label></th>
+                <td><input type="checkbox" name="kores" id="kores" checked></td>
+                <td><p id="valkores"></p></td>
+            </tr>
+            <tr id = "adresKores">
+                <th><label for="adkores">Adres korespondencyjny</label></th>
+                <td><input type="text" name="adkores" id="adkores" disabled = "disabled"></td>
+                <td><p id="valadkores"></p></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="zapisz" id="wyslij"></td>
+            </tr>
+        </table>
+        
+    </form>
+
+    <datalist id="polskieWojewodztwa">
+        <option value="Dolnośląskie">Dolnośląskie</option>
+        <option value="Kujawsko-pomorskie">Kujawsko-pomorskie</option>
+        <option value="Lubelskie">Lubelskie</option>
+        <option value="Lubuskie">Lubuskie</option>
+        <option value="Łódzkie">Łódzkie</option>
+        <option value="Małopolskie">Małopolskie</option>
+        <option value="Mazowieckie">Mazowieckie</option>
+        <option value="Opolskie">Opolskie</option>
+        <option value="Podkarpackie">Podkarpackie</option>
+        <option value="Podlaskie">Podlaskie</option>
+        <option value="Pomorskie">Pomorskie</option>
+        <option value="Podlaskie">Podlaskie</option>
+        <option value="Pomorskie">Pomorskie</option>
+        <option value="Śląskie">Śląskie</option>
+        <option value="Świętokrzyskie">Świętokrzyskie</option>
+        <option value="Warmińsko-mazurskie">Warmińsko-mazurskie</option>
+        <option value="Wielkopolskie">Wielkopolskie</option>
+        <option value="Zachodniopomorskie">Zachodniopomorskie</option>
+      </datalist>
+
+    <script>
+        var d = document;
+
+        function validateForm(){
+            let dane = d.forms["dane"];
+            let poprawne = true;
+            for(let i = 0; i < dane.length - 1; i++){
+                dane[i].style = "";
+                if(dane[i].hasAttribute("disabled")) continue;
+                if(dane[i].id == "adkores" && ukryte) continue;
+                if(sprawdzCzyPuste(dane[i].value)){
+                    dane[i].style = "background-color:red;";
+                    d.querySelector("#val"+dane[i].id).innerHTML = "To pole nie może być puste!";
+                    poprawne = false;
+                    continue;
+                }
+                else if(dane[i].type != "submit" && dane[i].id != "powthaslo"){
+                    d.querySelector("#val"+dane[i].name).innerHTML = "";
+                }
+
+
+                if(dane[i].type == "text"){
+                    if(sprawdzDlugoscZnakow(3, 14, dane[i].value)){
+                        dane[i].style = "background-color:red;";
+                        d.querySelector("#val"+dane[i].id).innerHTML = "Pole musi zawierać od 3 do 14 znaków!";
+                        poprawne = false;
+                    }
+                }
+                else if(dane[i].type == "email"){
+                    if(sprawdzMaila(dane[i].value)){
+                        dane[i].style = "background-color:red;";
+                        d.querySelector("#val"+dane[i].id).innerHTML = "Wpisz poprawny e-mail!";
+                        poprawne = false;
+                    }
+                }
+                else if(dane[i].type == "radio"){
+                    let zaznaczone = sprawdzRadio(dane[i]);
+                    i++;
+                    if(!zaznaczone) zaznaczone = sprawdzRadio(dane[i]);
+                    if(!zaznaczone){
+                        d.querySelector("#val"+dane[i].name).innerHTML = "Należy zaznaczyć jedną z opcji"
+                        poprawne = false;
+                    } 
+                }
+                else if(dane[i].type == "tel"){
+                    if(sprawdzTelefon(dane[i].value)){
+                        dane[i].style = "background-color:red;";
+                        d.querySelector("#val"+dane[i].id).innerHTML = "Pole musi zawierać 9 cyfr bez spacji!";
+                        poprawne = false;
+                    }
+                }
+                else if(dane[i].type == "password" && dane[i].id != "powthaslo"){
+                    if(sprawdzDlugoscZnakow(8, 24, dane[i].value)){
+                        dane[i].style = "background-color:red;";
+                        d.querySelector("#val"+dane[i].id).innerHTML = "Hasło musi zawierać od 8 do 24 znaków!";
+                        poprawne = false;
+                    }
+                    if(dane[i].value != d.querySelector("#powthaslo").value){
+                        d.querySelector("#valpowthaslo").innerHTML = "Hasła się od siebie różnią!";
+                        poprawne = false;
+                    } 
+                }
+                else if(dane[i].type == "date"){
+                    if(sprawdzPelnoletniosc(dane[i].value)){
+                        dane[i].style = "background-color:red;";
+                        d.querySelector("#val"+dane[i].id).innerHTML = "Musisz być pełnoletni!";
+                        poprawne = false;
+                    }
+                }
+
+
+            }
+            return poprawne;
+        }
+
+
+        
+        function sprawdzCzyPuste(value){
+            if(value == "") return true;
+            return false;
+        }
+
+        function sprawdzDlugoscZnakow(min, max, value){
+            if(value.length < min || value.length > max) return true;
+            return false;
+        }
+
+        function sprawdzMaila(value){
+            let maMalpe = false;
+            let maKropke = false;
+            for(let i = 0; i < value.length; i++){
+                if(value[i] == "@") maMalpe = true;
+                else if(value[i] == "." && maMalpe) maKropke = true;
+            }
+
+            return !maMalpe || !maKropke;
+        }
+
+        function sprawdzRadio(input){
+            if(input.checked) return true;
+            return false;
+        }
+
+        function sprawdzTelefon(value){
+            if(value.length != 9) return true;
+            let temp;
+            for(let i = 0; i < 9; i++){
+                temp = parseInt(value[i]);
+                if(temp >=0 && temp < 10) continue;
+                return true;
+            }
+            return false;
+        }
+
+        function sprawdzPelnoletniosc(value){
+            let data = new Date();
+            let podanyRok = parseInt(value[0] + value[1] + value[2] + value[3]);
+            if(data.getFullYear() - podanyRok < 18) return true;
+            return false;
+        }
+
+        function zwrocTrudnoscHasla(value){
+            let secik = new Set();
+            for(let i = 0; i < value.length; i++){
+                secik.add(value[i]);
+            }
+
+            if(secik.size > 15) return "Silne";
+            if(secik.size > 8) return "Może być";
+            return "Słabe";
+        }
+
+
+
+        function wypiszSileHasla(){
+            if(!sprawdzDlugoscZnakow(8, 24, d.querySelector("#haslo").value)){
+                d.querySelector("#valhaslo").innerHTML = zwrocTrudnoscHasla(d.querySelector("#haslo").value);
+            }
+            else{
+                d.querySelector("#valhaslo").innerHTML = "Hasło musi zawierać od 8 do 24 znaków";
+            }
+        }
+
+        function wypiszRownoscHasel(){
+            if(d.querySelector("#haslo").value != d.querySelector("#powthaslo").value){
+                d.querySelector("#valpowthaslo").innerHTML = "Hasła się od siebie różnią!";
+            }
+            else{
+                d.querySelector("#valpowthaslo").innerHTML = "Ok";
+            }
+        }
+
+        var ukryte = true;
+        function pokazAdresKores(){
+            if(ukryte){
+                d.querySelector("#adresKores").style.display = "table-row";
+                //d.querySelector("#adkores").removeAttribute("disabled", "disabled");
+            }
+            else {
+                d.querySelector("#adresKores").style.display = "none";
+                //d.querySelector("#adkores").setAttribute("disabled", "disabled");
+            }
+            
+
+            ukryte = !ukryte;
+        }
+
+        function zmienWartoscDisabledDlaWojewodztwa(){
+            zmienTypInputaJakJestPolska();
+            if(d.querySelector("#kraj").value != ""){
+                if(d.querySelector("#wojewodztwo").hasAttribute("disabled")){
+                    d.querySelector("#wojewodztwo").removeAttribute("disabled", "disabled");
+                }
+            }
+            else {
+                if(!d.querySelector("#wojewodztwo").hasAttribute("disabled")){
+                    d.querySelector("#wojewodztwo").setAttribute("disabled", "disabled");
+                }
+            }
+            
+        }
+
+        function zmienWartoscDisabledDlaAdresow(){
+            if(d.querySelector("#wojewodztwo").value != ""){
+                if(d.querySelector("#adres").hasAttribute("disabled")){
+                    d.querySelector("#adres").removeAttribute("disabled", "disabled");
+                }
+                if(d.querySelector("#adkores").hasAttribute("disabled")){
+                    d.querySelector("#adkores").removeAttribute("disabled", "disabled");
+                }
+            }
+            else {
+                if(!d.querySelector("#adres").hasAttribute("disabled")){
+                    d.querySelector("#adres").setAttribute("disabled", "disabled");
+                }
+                if(!d.querySelector("#adkores").hasAttribute("disabled")){
+                    d.querySelector("#adkores").setAttribute("disabled", "disabled");
+                }
+            }
+            
+        }
+        
+
+        function zmienTypInputaJakJestPolska(){
+            if(d.querySelector("#kraj").value == "Polska"){
+                d.querySelector("#wojewodztwo").setAttribute("list", "polskieWojewodztwa");
+            }
+            else{
+                if(d.querySelector("#wojewodztwo").hasAttribute("list", "polskieWojewodztwa")){
+                    d.querySelector("#wojewodztwo").removeAttribute("list", "polskieWojewodztwa");
+                }
+            }
+        }
+
+        var cyfry = new Set();
+        for(let i = 0; i < 10; i++){
+            cyfry.add(i);
+        }
+
+        function wpisujTylkoCyfry(){
+            var text = d.querySelector("#tel").value;
+            if(!cyfry.has(parseInt(text[text.length-1]))){
+                d.querySelector("#tel").value = "";
+            }
+        }
+
+
+        d.querySelector("#haslo").addEventListener("keydown", wypiszSileHasla);
+        d.querySelector("#powthaslo").addEventListener("keyup", wypiszRownoscHasel);
+        d.querySelector("#kores").addEventListener("click", pokazAdresKores);
+        d.querySelector("#kraj").addEventListener("keyup", zmienWartoscDisabledDlaWojewodztwa);
+        d.querySelector("#wojewodztwo").addEventListener("keyup", zmienWartoscDisabledDlaAdresow);
+
+        d.querySelector("#tel").addEventListener("keyup", wpisujTylkoCyfry);
+
+
+    </script>
+</body>
+</html>
